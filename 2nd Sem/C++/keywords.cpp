@@ -8,5 +8,6 @@ int main()
     Input: cin
     Output: cout
     Loops: for, while, do...while
+    Branching Statement: if,if..else,if...else if...else,switch
     */
 }
