@@ -23,7 +23,7 @@ void student::getDetails(void)
     perc = (float)total / 500 * 100;
 }
 
-//member function definition, outside of the class
+
 void student::putDetails(void)
 {
     cout<< "Student details:\n";
@@ -32,7 +32,7 @@ void student::putDetails(void)
 
 int main()
 {
-    student std; //object creation
+    student std;
 
     std.getDetails();
     std.putDetails();
