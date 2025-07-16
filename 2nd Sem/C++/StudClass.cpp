@@ -8,12 +8,10 @@ private:
     float perc;
 
 public:
-    //member function to get student's details
     void getDetails(void);
-    //member function to print student's details
     void putDetails(void);
 };
-//member function definition, outside of the class
+
 void student::getDetails(void)
 {
     cout<< "Enter name: ";
