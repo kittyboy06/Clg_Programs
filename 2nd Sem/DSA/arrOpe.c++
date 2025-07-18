@@ -71,19 +71,37 @@ void Create()
 
 int main() {
     Create();
-    display();
-    
-    int valueToRemove;
-    cout << "Enter value to remove: ";
-    cin >> valueToRemove;
-    remove(valueToRemove);
-    display();
-    
-    int valueToSearch;
-    cout << "Enter value to search: ";
-    cin >> valueToSearch;
-    search(valueToSearch);
-    
+    int choice, value;
+    do {
+        cout << "\nMenu:\n1. Add Element\n2. Display Array\n3. Remove Element\n4. Search Element\n5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to add: ";
+                cin >> value;
+                add(value);
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                cout << "Enter value to remove: ";
+                cin >> value;
+                remove(value);
+                break;
+            case 4:
+                cout << "Enter value to search: ";
+                cin >> value;
+                search(value);
+                break;
+            case 5:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice, please try again." << endl;
+        }
+    } while (choice != 5);
     return 0;
 }
-
