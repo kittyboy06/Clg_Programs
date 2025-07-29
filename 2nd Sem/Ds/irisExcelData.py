@@ -1,6 +1,6 @@
 import pandas as pd
 print("Reading the iris dataset data from Excel file...")
-iris_data = pd.read_excel('C:\\Users\\Admin\\Desktop\\Kittyboy\\Clg_Programs\\2nd Sem\\Ds\\iris.xlsx')
+iris_data = pd.read_excel('C:\\Users\\           Admin\\Desktop\\Kittyboy\\Clg_Programs\\2nd Sem\\Ds\\iris.xlsx')
 print(iris_data.head())
 print("Data Shape:", iris_data.shape)
 print("Data info:\n", iris_data.info())
