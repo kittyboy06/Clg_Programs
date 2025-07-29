@@ -1,7 +1,7 @@
 import pandas as pd
 print("Reading iris dataset...")
 col_names = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
-iris_data = pd.read_csv('C:\\Users\\Admin\\Desktop\\Kittyboy\\Clg_Programs\\2nd Sem\\Ds\\iris.csv', header=1, names=col_names)
+iris_data = pd.read_csv('D:\\Clg\\Clg_Programs\\2nd Sem\\Ds\\iris.csv', header=1, names=col_names)
 print(iris_data)
 print(iris_data[['SepalLength', 'SepalWidth']])
 print(iris_data.iloc[3],'\n\n',iris_data.iloc[4])

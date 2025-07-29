@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string.h>
+#include<cstring>
 using namespace std;
 
 void lengthOfString() {
@@ -95,30 +96,45 @@ void stringReplace() {
     cin >> oldChar;
     cout << "Enter new character: ";
     cin >> newChar;
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == oldChar) {
-            str[i] = newChar;
-        }
-    }
+    replace(str, oldChar, newChar);
     cout << "Modified string: " << str << endl;
 }
 
 void stringSubstring() {
-    char str[50];
+    char string_1[30];
     int start, length;
+
     cout << "Enter a string: ";
-    cin >> str;
+    gets(string_1);
+
     cout << "Enter start index and length for substring: ";
     cin >> start >> length;
-    char subStr[50];
-    strncpy(subStr, str + start, length);
-    subStr[length] = '\0'; // Null-terminate the substring
+
+    char subStr[30];
+
+    // Get the actual length of the original string
+    int str_len = strlen(string_1);
+
+    // Validate start and length
+    if (start < 0 || start >= str_len || length < 0 || start + length > str_len) {
+        cout << "Invalid start or length.\n";
+        return;
+    }
+
+    // Ensure we don't overflow subStr
+    if (length >= sizeof(subStr))
+        length = sizeof(subStr) - 1;
+
+    strncpy(subStr, string_1 + start, length);
+    subStr[length] = '\0';  // Ensure null termination
+
     cout << "Substring: " << subStr << endl;
 }
 
+
 int main()
 {
-    cout<<"Enter your Choice\n1. Length Of String\n2. Swap()\n3. Sizeof()\n4. String Concatenation\n5. String Comparison\n6. String Copy\n7. String Reverse\n8. String Find\n9. String Replace\n10. String Substring\n11. Exit"<<endl;
+    cout<<"Enter your Choice\n1. Length 11Of String\n2. Swap()\n3. Sizeof()\n4. String Concatenation\n5. String Comparison\n6. String Copy\n7. String Reverse\n8. String Find\n9. String Replace\n10. String Substring\n11. Exit"<<endl;
     int choice;
     cin>>choice;
     switch(choice)
