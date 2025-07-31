@@ -1,39 +1,65 @@
 #include <iostream>
-#include<string.h>
 using namespace std;
 
-class Student {
-    char name[20];
-    int roll;
-    int marks;
-    int phno;
-
-public:
-    Student(const char* n, int r, int m, int p) {
-        strcpy(name, n);
+class stud
+{
+    int roll, per;
+    public:
+    stud()
+    {
+        cout << "Enter roll number and percentage: ";
+        cin >> roll >> per;
+        cout<<"Default constructor" << endl;
+        cout<<"\t\tSTUDENT DETAILS" << endl;
+        cout << "Roll Number: " << roll << endl;
+        cout << "Percentage: " << per << endl;
+    }
+    stud(int r, int p)
+    {
         roll = r;
-        marks = m;
-        phno = p;
+        per = p;
+        cout << "Parameterized constructor" << endl;
+        cout<<"\t\tSTUDENT DETAILS" << endl;
+        cout << "Roll Number: " << roll << endl;
+        cout << "Percentage: " << per << endl;
     }
-
-    ~Student() {
-        cout << "Destructor called for " << name << endl;
+    stud(const stud &s)
+    {
+        roll = s.roll;
+        per = s.per;
+        cout << "Copy constructor" << endl;
+        cout<<"\t\tSTUDENT DETAILS" << endl;
+        cout << "Roll Number: " << roll << endl;
+        cout << "Percentage: " << per << endl;
     }
-
-    void displayData() {
-        cout << "Name: " << name
-             << ", Roll No: " << roll
-             << ", Marks: " << marks
-             << ", Phone No: " << phno << endl;
+    void display()
+    {
+        cout << "Roll Number: " << roll << endl;
+        cout << "Percentage: " << per << endl;
+    }
+    ~stud()
+    {
+        cout << "Destructor called for roll number: " << roll << endl;
     }
 };
 
-int main() {
-    Student s1("Alice", 101, 90, 1234567890);
-    Student s2("Bob", 102, 85, 9876543210);
+int main()
+{
+    int i,r;
+    cout<<"Enter Roll Number and Percentage: ";
+    cin>>r>>i;
+    stud s1(r,i); // Parameterized constructor
+    stud s2(101, 85); // Parameterized constructor
+    stud s3(s2); // Copy constructor
 
-    s1.displayData();
-    s2.displayData();
+    cout << "Details of Student 1:" << endl;
+    s1.display();
+
+    cout << "Details of Student 2:" << endl;
+    s2.display();
+
+    cout << "Details of Student 3 (Copy of Student 2):" << endl;
+    s3.display();
 
     return 0;
 }
