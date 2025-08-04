@@ -35,7 +35,7 @@ class stud
     void display()
     {
         cout << "Roll Number: " << roll << endl;
-        cout << "Percentage: " << per << endl;
+        cout << "Percentage: " << per <<"%" << endl;
     }
     ~stud()
     {
@@ -49,8 +49,8 @@ int main()
     cout<<"Enter Roll Number and Percentage: ";
     cin>>r>>i;
     stud s1(r,i); // Parameterized constructor
-    stud s2(101, 85); // Parameterized constructor
-    stud s3(s2); // Copy constructor
+    stud s2;
+    stud s3(s1); // Copy constructor
 
     cout << "Details of Student 1:" << endl;
     s1.display();
