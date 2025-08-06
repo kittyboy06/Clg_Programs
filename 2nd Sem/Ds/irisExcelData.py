@@ -1,10 +1,10 @@
 import pandas as pd
 print("Reading the iris dataset data from Excel file...")
-iris_data = pd.read_excel('C:\\Users\\           Admin\\Desktop\\Kittyboy\\Clg_Programs\\2nd Sem\\Ds\\iris.xlsx')
+iris_data = pd.read_excel('D:\\Clg\\Clg_Programs\\2nd Sem\\Ds\\iris.xlsx')
 print(iris_data.head())
 print("Data Shape:", iris_data.shape)
 print("Data info:\n", iris_data.info())
 print("Descriptive Statistics:\n", iris_data.describe())
 print(iris_data.iloc[2])
-print("Maximum of SepalLength:", iris_data.max())
-print("Minimum of SepalLength:", iris_data.min())
+print("Maximum of SepalLength:", iris_data[5.1].max())
+print("Minimum of SepalLength:", iris_data[5.1].min())
