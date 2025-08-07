@@ -10,31 +10,33 @@ class Vehicle
 class Road : public Vehicle
 {
     public:
-    int Wheels;
+    string VehicleType;
 };
 
-class Car : public Road
+class RoadVehicle : public Road
 {
     string brand;
 public:
-    void getData() {
-        cout << "Enter brand of the car: ";
+    void getData() 
+    {
+        cout << "Enter brand: ";
         cin >> brand;
-        cout << "Passengers in the car: ";
+        cout << "Passengers: ";
         cin >> passengers;
-        cout << "Number of wheels: ";
-        cin >> Wheels;
+        cout << "Vehicle Type: ";
+        cin >> VehicleType;
     }
-    void display() {
-        cout << "Brand of the car: " << brand << endl;
-        cout << "Passengers in the car: " << passengers << endl;
-        cout << "Number of wheels: " << Wheels << endl;
+    void display() 
+    {
+        cout << "Brand: " << brand << endl;
+        cout << "Passengers: " << passengers << endl;
+        cout << "Vehicle Type: " << VehicleType << endl;
     }
 };
 
 int main()
 {
-    Car myCar;
+    RoadVehicle myCar;
     myCar.getData();
     myCar.display();
     return 0;

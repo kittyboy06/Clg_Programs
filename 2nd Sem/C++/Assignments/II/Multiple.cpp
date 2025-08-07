@@ -33,7 +33,7 @@ public:
         cout << "Passengers in the car: " << passengers << endl;
         cout << "Name of the owner: " << name << endl;
         cout << "Age of the owner: " << age << endl;
-        cout << "Phone number of the owner: " << phone << endl;
+        cout << "Phone number: " << phone << endl;
     }
 };
 int main() 
