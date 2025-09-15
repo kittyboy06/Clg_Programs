@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "hello",
+      "request": "launch",
+      "mainClass": "hello",
+      "projectName": "Clg_Programs_10d1df5c"
+    },
+    {
       "name": "C/C++: g++.exe build and debug active file",
       "type": "cppdbg",
       "request": "launch",
