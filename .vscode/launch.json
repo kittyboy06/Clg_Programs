@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "h",
+      "request": "launch",
+      "mainClass": "h",
+      "projectName": "Clg_Programs_10d1df5c"
+    },
+    {
+      "type": "java",
       "name": "hello",
       "request": "launch",
       "mainClass": "hello",
