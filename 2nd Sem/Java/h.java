@@ -1,7 +1,6 @@
-package 2nd Sem.Java;
-
+import static java.lang.System.out;
 public class h {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        out.println("Hello, World!");
     }
 }
