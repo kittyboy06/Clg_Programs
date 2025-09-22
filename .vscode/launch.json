@@ -3,6 +3,27 @@
   "configurations": [
     {
       "type": "java",
+      "name": "circle",
+      "request": "launch",
+      "mainClass": "circle",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "hello",
+      "request": "launch",
+      "mainClass": "hello",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "h",
+      "request": "launch",
+      "mainClass": "h",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "simpleinterest",
       "request": "launch",
       "mainClass": "simpleinterest",

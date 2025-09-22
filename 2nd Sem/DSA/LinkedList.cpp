@@ -43,6 +43,23 @@ void Insert_End(int x)
     }
 }
 
+void Insert_Middle(int x,int p)
+{
+    NewNode = (struct LinkedList*)malloc(sizeof(struct LinkedList));
+    NewNode->data = x;
+    while (Temp -> next != NULL)
+    {
+        for (int i = 0; i < p - 1; i++)
+        {
+            Temp = Temp->next;
+        }
+        NewNode->next = Temp->next;
+        Temp->next = NewNode;
+    }
+    Temp = List;
+    
+}
+
 int main()
 {
     return 0;

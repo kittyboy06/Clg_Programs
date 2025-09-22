@@ -40,7 +40,6 @@ int main()
     ++obj;
     obj.display();
     --obj;
-    ;
     obj.print();
     
     return 0;
