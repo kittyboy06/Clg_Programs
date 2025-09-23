@@ -14,9 +14,12 @@ axs[0, 0].legend()
 axs[0, 0].grid(True)
 
 # Bar Chart
+sub = []
 categories = ['A', 'B', 'C', 'D']
 values = [10, 24, 36, 18]
-axs[0, 1].bar(categories, values, color='skyblue')
+for i in range(len(values)):
+    sub.append(values[i] - 20)
+axs[0, 1].bar(categories, sub, color='skyblue')
 axs[0, 1].set_title('Bar Chart')
 axs[0, 1].set_xlabel('Category')
 axs[0, 1].set_ylabel('Value')
