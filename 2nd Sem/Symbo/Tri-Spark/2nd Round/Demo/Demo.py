@@ -23,8 +23,8 @@ axs[0, 1].set_ylabel('Value')
 axs[0, 1].grid(True)
 
 # Scatter Plot
-x_scatter = np.random.rand(50)
-y_scatter = np.random.rand(50)
+x_scatter = np.random.rand(10)
+y_scatter = np.random.rand(10)
 axs[1, 0].scatter(x_scatter, y_scatter, color='green')
 axs[1, 0].set_title('Scatter Plot')
 axs[1, 0].set_xlabel('X')
