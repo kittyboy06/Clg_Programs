@@ -18,7 +18,7 @@ sub = []
 categories = ['A', 'B', 'C', 'D']
 values = [10, 24, 36, 18]
 for i in range(len(values)):
-    sub.append(values[i] - 20)
+    sub.append(values[i] * 20)
 axs[0, 1].bar(categories, sub, color='skyblue')
 axs[0, 1].set_title('Bar Chart')
 axs[0, 1].set_xlabel('Category')
