@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Emp",
+      "request": "launch",
+      "mainClass": "Emp",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "circle",
       "request": "launch",
       "mainClass": "circle",
