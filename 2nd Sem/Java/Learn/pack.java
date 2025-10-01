@@ -1,10 +1,8 @@
-package Lab;
-import Learn.Over;
+package Learn;
 
 
-public class hello {
+public class pack {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
         Over obj = new Over();
         obj.Add(3, 4);
     }

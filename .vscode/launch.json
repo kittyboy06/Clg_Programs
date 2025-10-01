@@ -3,6 +3,76 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Dae",
+      "request": "launch",
+      "mainClass": "Thread.Dae",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "pri",
+      "request": "launch",
+      "mainClass": "Thread.pri",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "name",
+      "request": "launch",
+      "mainClass": "Thread.name",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Sle",
+      "request": "launch",
+      "mainClass": "Thread.Sle",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Cre",
+      "request": "launch",
+      "mainClass": "Thread.Cre",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "hello",
+      "request": "launch",
+      "mainClass": "Lab.hello",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "pack",
+      "request": "launch",
+      "mainClass": "Learn.pack",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "fin",
+      "request": "launch",
+      "mainClass": "Learn.fin",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "sup",
+      "request": "launch",
+      "mainClass": "Learn.sup",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Over",
+      "request": "launch",
+      "mainClass": "Learn.Over",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "Multi_Inher",
       "request": "launch",
       "mainClass": "Learn.Multi_Inher",
