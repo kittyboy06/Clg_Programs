@@ -1,3 +1,4 @@
+package Lab;
 import static java.lang.System.out;
 import java.util.Scanner;
 public class circle {

@@ -3,6 +3,48 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Multi_Inher",
+      "request": "launch",
+      "mainClass": "Learn.Multi_Inher",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Sin_Inher",
+      "request": "launch",
+      "mainClass": "Learn.Sin_Inher",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Para_Cons",
+      "request": "launch",
+      "mainClass": "Learn.Para_Cons",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Cons",
+      "request": "launch",
+      "mainClass": "Learn.Cons",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Base",
+      "request": "launch",
+      "mainClass": "Learn.Base",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Multi_Class",
+      "request": "launch",
+      "mainClass": "Learn.Multi_Class",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "Emp",
       "request": "launch",
       "mainClass": "Emp",

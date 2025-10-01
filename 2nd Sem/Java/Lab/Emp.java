@@ -1,3 +1,4 @@
+package Lab;
 import static java.lang.System.out;
 import java.util.Scanner;
 
@@ -18,7 +19,8 @@ class Employee
         out.print("Enter Employee Age: ");
         age = sc.nextInt();
         out.print("Enter Employee Basic Salary: ");
-        basicSalary = sc.nextDouble();
+        basicSalary
+         = sc.nextDouble();
         sc.close();
     }
 
