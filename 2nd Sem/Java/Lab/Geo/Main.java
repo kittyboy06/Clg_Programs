@@ -1,4 +1,4 @@
-package Geo;
+package Lab.Geo;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package Geo;
+package Lab.Geo;
 
 public class Rectangle {
     public double length;

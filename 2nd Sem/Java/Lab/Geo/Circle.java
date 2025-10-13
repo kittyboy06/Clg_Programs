@@ -1,4 +1,4 @@
-package Geo;
+package Lab.Geo;
 
 public class Circle {
     public double radius;
