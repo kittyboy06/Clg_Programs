@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "SportsMain",
+      "request": "launch",
+      "mainClass": "SportsMain",
+      "projectName": "Clg_Programs_ce42fda4"
+    },
+    {
+      "type": "java",
       "name": "Dae",
       "request": "launch",
       "mainClass": "Thread.Dae",
