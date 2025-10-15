@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 diabetes_uci = pd.read_csv("C:\\Users\\Admin\\Desktop\\Kittyboy\\Clg_Programs\\2nd Sem\\Ds\\1.csv")
-diabetes_pima = pd.read_csv("C:\\Users\\Admin\\Desktop\\Kittyboy\\Clg_Programs\\2nd Sem\\Ds\\diabetes.csv")
+diabetes_pima = pd.read_csv("C:\\Users\\Admin\\Desktop\\Kittyboy\\Clg_Programs\\2nd Sem\\Ds\\diabetes.csv")  
 X1, Y1 = diabetes_uci[['Glucose', 'BMI', 'BloodPressure']], diabetes_uci['Outcome']
 X2, Y2 = diabetes_pima[['Glucose', 'BMI', 'BloodPressure']], diabetes_pima['Outcome']
 X_train1, X_test1, Y_train1, Y_test1 = train_test_split(X1, Y1, test_size=0.2, random_state=42)
