@@ -1,3 +1,4 @@
+package Lab;
 interface Playable 
 {
     void play(); //abstract method
