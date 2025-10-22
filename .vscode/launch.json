@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Synco",
+      "request": "launch",
+      "mainClass": "Lab.Synco",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "WSynco",
+      "request": "launch",
+      "mainClass": "Lab.WSynco",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "SportsMain",
       "request": "launch",
       "mainClass": "SportsMain",

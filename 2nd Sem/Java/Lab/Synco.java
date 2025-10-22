@@ -1,64 +1,60 @@
 package Lab;
-
-class Table
-{
-    synchronized void printTable()
-    {
-        for(int i=1;i<=5;i++)
-        {
-            System.out.println("Value: "+i);
-            try
-            {
+class Table {
+    // The 'synchronized' keyword ensures that only one thread can execute this method at a time.
+    synchronized void printTable() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Value: " + i);
+            try {
                 Thread.sleep(100);
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 System.out.println(e);
             }
         }
     }
 }
 
-class Thread1 extends Thread
-{
-    Table t;
-    Thread1(Table t)
-    {
-        this.t=t;
+class Thread1 extends Thread {
+    Table table;
+
+    Thread1 (Table table) {
+        this.table = table;
     }
-    public void run()
-    {
-        t.printTable();
+
+    public void run() {
+        table.printTable();
+        System.out.println(); // Added a blank line for output separation
     }
 }
 
-class Thread2 extends Thread
-{
-    Table t;
-    Thread2(Table t)
-    {
-        this.t=t;
+class Thread2 extends Thread {
+    Table table;
+
+    Thread2 (Table table) {
+        this.table = table;
     }
-    public void run()
-    {
-        t.printTable();
+
+    public void run() {
+        table.printTable();
     }
 }
 
 public class Synco {
-    Table obj = new Table();
-    Thread1 t1 = new Thread1(obj);
-    Thread2 t2 = new Thread2(obj);
-    t1.start();
-    t2.start();
-    try
-    {
-        t1.join();
-        t2.join();
+    public static void main (String[] args) {
+        Table table = new Table();
+
+        Thread1 thread1 = new Thread1 (table);
+        Thread2 thread2 = new Thread2 (table);
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+
+        System.out.println("table Printed");
     }
-    catch (InterruptedException e)
-    {
-        System.out.println(e);
-    }   
-    System.out.println("tables printed");
 }
