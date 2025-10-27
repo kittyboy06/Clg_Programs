@@ -1,10 +1,10 @@
 #include<iostream>
 using namespace std;
-template <class T> void swap(T *a, T *b)
+template <class T> void swap(T &a, T &b)
 {
     T temp = a;
     a = b;
-    b = temp;
+     b = temp;
 }
 
 int main()

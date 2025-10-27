@@ -9,7 +9,7 @@ y = data['BMI']
 
 correlation_coefficient = x.corr(y)
 
-plt.scatter(x, y, marker='x', color = 'red')
+plt.scatter(x, y, marker='.', color = 'red')
 plt.xlabel('AGE')
 plt.ylabel('BMI')
 plt.title('Scatter Plot: AGE vs. BMI')

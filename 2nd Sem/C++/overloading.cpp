@@ -1,25 +1,25 @@
 #include<iostream>
 using namespace std;
 
-double areacircle(double radius) 
+double area(double radius) 
 {
     return 3.14 * radius * radius;
 }
 
-double arearectangle(double length, double width) 
+double area(double length, double width) 
 {
     return length * width;
 }
 
-double areasquare(double side) 
+double area(int side) 
 {
     return side * side;
 }
 
 int main() 
 {
-    int choice;
-    double radius, length, width, side;
+    int choice,side;
+    double radius, length, width;
 
     cout << "Choose a shape to calculate area:\n1. Circle\n2. Rectangle\n3. Square\n4. Exit\n";
 
@@ -33,17 +33,17 @@ int main()
             case 1:
                 cout << "Enter radius of the circle: ";
                 cin >> radius;
-                cout << "Area of Circle: " << areacircle(radius) << endl;
+                cout << "Area of Circle: " << area(radius) << endl;
                 break;
             case 2:
                 cout << "Enter length and width of the rectangle: ";
                 cin >> length >> width;
-                cout << "Area of Rectangle: " << arearectangle(length, width) << endl;
+                cout << "Area of Rectangle: " << area(length, width) << endl;
                 break;
             case 3:
                 cout << "Enter side of the square: ";
                 cin >> side;
-                cout << "Area of Square: " << areasquare(side) << endl;
+                cout << "Area of Square: " << area(side) << endl;
                 break;
             case 4:
                 cout << "Exiting program." << endl;

@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import accuracy_score
@@ -33,23 +34,22 @@ print("R Squared Value for Dataset 2:", model2.score(x2_test,y2_test))
 print("Mean Squared Error for Dataset 2:", mean_squared_error(y2_test, y2_pred))
 print("Linear Regression")
 print("Mean Squared Error:",mean_squared_error(y1_test,y1_pred))
-print("R Squared Value:",model2.score(y2_test,y2_pred))
-leature_Col = ["pregnancies","glucose","bloodpressure","skinthickness"]
-w1,w2 = d1[leature_Col],d2[leature_Col]
-z1,z2 = d1.outcome,d2.outcome
+print("R Squared Value:",model2.score(x2_test,y2_test))
+feature_Col = cn
+w1,w2 = d1[feature_Col],d2[feature_Col]
+z1,z2 = d1.Outcome,d2.Outcome
 w1_train,w1_test,z1_train,z1_test = train_test_split(w1,z1,test_size=0.2,random_state=42)
 w2_train,w2_test,z2_train,z2_test = train_test_split(w2,z2,test_size=0.2,random_state=42)
-vci_md1 = LinearRegression()
-pima_md1 = LinearRegression()
-vci_md1.fit(w1_train,z1_train)
+Uci_md1 = LogisticRegression(max_iter=1000)
+pima_md1 = LogisticRegression(max_iter=1000)
+Uci_md1.fit(w1_train,z1_train)
 pima_md1.fit(w2_train,z2_train)
-vci_md1.fit(w1_train,z1_train)
-pima_md1.fit(w2_train,z2_train)
-ypu = vci_md1.predict(w1_test)
+ypu = Uci_md1.predict(w1_test)
 ypp = pima_md1.predict(w2_test)
 print("Logistic Regression:")
 print("Accuracy:",accuracy_score(z1_test,ypu))
-print("Precision:",precision_score(z1_test,ypp))
-print()
+print("Precision:",precision_score(z1_test,ypu))
+print("Logistic Regression:")
 print("Accuracy:",accuracy_score(z2_test,ypp))
+print("Precision:",precision_score(z2_test,ypp))
 print("Precision:",precision_score(z2_test,ypp))

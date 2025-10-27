@@ -16,7 +16,7 @@ public:
     {
         cout << "String: " << str << endl;
     }
-    String operator+(String s)
+    String operator +(String s)
     {
         String obj;
         strcat(str, s.str);
