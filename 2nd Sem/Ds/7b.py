@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import kde, gaussian_kde
 
-path = "C:\\Users\\Admin\\Downloads\\diabetes[1].csv"
+path = "D:\\Clg\\Clg_Programs\\2nd Sem\\Ds\\diabetes.csv"
 data = pd.read_csv(path)
 
 col_names = data.columns.tolist()
@@ -36,4 +36,3 @@ plt.ylabel('Y')
 plt.title('Contour Plot')
 plt.legend()
 plt.show()
-

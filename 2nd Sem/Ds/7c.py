@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-path ="C:\\Users\\Admin\\Downloads\\diabetes[1].csv"
+path ="D:\\Clg\\Clg_Programs\\2nd Sem\\Ds\\diabetes.csv"
 data = pd.read_csv(path)
 
 x = data['Age']

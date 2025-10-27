@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "LoginForm",
+      "request": "launch",
+      "mainClass": "Lab.LoginForm",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "Synco",
       "request": "launch",
       "mainClass": "Lab.Synco",
