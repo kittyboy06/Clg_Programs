@@ -11,7 +11,7 @@ class incr
             cin >> n;
         }
 
-        void operator +()
+        void operator ++()
         {
             n++;
         }
@@ -37,7 +37,7 @@ int main()
 {
     incr obj;
     obj.read();
-    +obj;
+    ++obj;
     obj.display();
     --obj;
     obj.print();
