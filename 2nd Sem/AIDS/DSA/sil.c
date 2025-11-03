@@ -2,9 +2,8 @@
 #include <stdlib.h>
 struct Node {
     int data;
-    struct Node* next;
+    struct Node* next, head;
 };
-struct Node* head = NULL;
 void insert(int val) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = val;

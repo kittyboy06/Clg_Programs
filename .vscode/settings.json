@@ -6,7 +6,8 @@
     "new": "cpp",
     "array": "cpp",
     "string": "cpp",
-    "span": "cpp"
+    "span": "cpp",
+    "sadtl": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

@@ -3,6 +3,34 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Jav16",
+      "request": "launch",
+      "mainClass": "Jav16",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Jav15",
+      "request": "launch",
+      "mainClass": "Jav15",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Jav14",
+      "request": "launch",
+      "mainClass": "Jav14",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "Jav12",
+      "request": "launch",
+      "mainClass": "Jav12",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "LoginForm",
       "request": "launch",
       "mainClass": "Lab.LoginForm",
