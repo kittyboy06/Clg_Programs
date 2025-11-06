@@ -19,8 +19,8 @@ public:
     String operator +(String s)
     {
         String obj;
-        strcat(str, s.str);
         strcpy(obj.str, str);
+        strcat(obj.str, s.str);
         return obj;
     }
 };
