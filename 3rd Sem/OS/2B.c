@@ -8,9 +8,10 @@ int main()
 {
     int i, status;
     pid_t pid;
+    pid = fork();
     if(pid < 0)
     {
-        printf("Fork failed\n");
+        printf("Process Creation Unsuccessful\n");
         exit(1);
     }
     else if(pid > 0)
