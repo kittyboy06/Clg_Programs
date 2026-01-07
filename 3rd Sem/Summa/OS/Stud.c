@@ -17,7 +17,15 @@ int main() {
     printf("Roll Number: %d\n", roll_no);
     printf("Name: %s\n", name);
     printf("Marks: %.2f\n", marks);
-
+    if (marks > 45)
+    {
+        printf("Pass");
+    }
+    else
+    {
+        printf("Fail");
+    }
+    
     getch();
     return 0;
 }
