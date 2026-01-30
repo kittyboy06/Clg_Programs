@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "XOMain",
+      "request": "launch",
+      "mainClass": "Demo.TicTacToe.XOMain",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
+      "name": "tic_tac_toe",
+      "request": "launch",
+      "mainClass": "Demo.tic_tac_toe",
+      "projectName": "Clg_Programs_80a1a69a"
+    },
+    {
+      "type": "java",
       "name": "Test",
       "request": "launch",
       "mainClass": "Lab.Test",
