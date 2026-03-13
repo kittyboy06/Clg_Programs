@@ -30,7 +30,9 @@ def astar(start_node, stop_node):
             new_cost = g[n] + cost
 
             if m not in open_set and m not in closed_set:
-                open_set.add(m)
+                open_set.adsudo apt update
+sudo apt install unityhub
+d(m)
                 parents[m] = n
                 g[m] = new_cost
             else:
