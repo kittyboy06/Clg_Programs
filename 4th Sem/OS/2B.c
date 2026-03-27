@@ -8,6 +8,7 @@ int main()
 {
     int i, status;
     pid_t pid;
+    pid = fork();
     if(pid < 0)
     {
         printf("Fork failed\n");

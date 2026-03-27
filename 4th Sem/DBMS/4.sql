@@ -13,3 +13,4 @@ END $$
 DELIMITER ;
 
 SELECT F_ADD(200,400);
+SET GLOBAL log_bin_trust_function_creators = 1;
