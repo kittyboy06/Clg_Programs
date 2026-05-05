@@ -1,43 +1,56 @@
 #include <stdio.h>
-
-#define PAGE_SIZE 1024
-
 int main()
 {
-    int process_size, virtual_address, total_pages;
-
-    printf("Enter process size (bytes): ");
-    scanf("%d", &process_size);
-
-    /* Calculate number of pages required */
-    total_pages = (process_size + PAGE_SIZE - 1) / PAGE_SIZE;
-
-    int page_table[total_pages];
-
-    printf("Enter frame mapping for %d pages:\n", total_pages);
-
-    for(int i = 0; i < total_pages; i++)
+    int blocksize [20], processsize [20], allocation [20];
+    int m, n;
+    printf("Enter number of memory partitions: ");
+    scanf("%d", &m);
+    printf("Enter size of each block: \n");
+    for (int i = 0; i < m; i++)
     {
-        printf("Page %d -> Frame: ", i);
-        scanf("%d", &page_table[i]);
+        printf("Block %d: ", i);
+        scanf("%d", &blocksize[i]);
     }
-
-    printf("Enter virtual address: ");
-    scanf("%d", &virtual_address);
-
-    int page_number = virtual_address / PAGE_SIZE;
-    int offset = virtual_address % PAGE_SIZE;
-
-    if(page_number >= total_pages)
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+    printf("Enter size of each process: \n");
+    for (int i = 0; i < n; i++)
     {
-        printf("Invalid virtual address\n");
-        return 1;
+        printf("Process %d: ", i);
+        scanf("%d", &processsize[i]);
+        allocation[i] = -1;
     }
-
-    int physical_address =
-        (page_table[page_number] * PAGE_SIZE) + offset;
-
-    printf("Physical Address = %d\n", physical_address);
-
+    for (int i = 0; i < n; i++)
+    {
+        int bestfit = -1;
+        for (int j = 0; j < m; j++)
+        {
+            if (blocksize[j] >= processsize[i])
+            {
+                if (bestfit == -1 || blocksize[bestfit] > blocksize[j])
+                {
+                    bestfit = j;
+                }
+            }
+        }
+        if (bestfit != -1)
+        {
+            allocation[i] = bestfit;
+            blocksize[bestfit] -= processsize[i];
+        }
+    }
+    printf("Process No.\tProcess Size\tPartition No.\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d\t\t%d\t\t", i, processsize[i]);
+        if (allocation[i] != -1)
+        {
+            printf("%d\n", allocation[i]);
+        }
+        else
+        {
+            printf("Not Allocated\n");
+        }
+    }
     return 0;
 }

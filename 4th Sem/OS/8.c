@@ -9,7 +9,6 @@ int main()
     printf("Enter process size (bytes): ");
     scanf("%d", &process_size);
 
-    /* Calculate number of pages required */
     total_pages = (process_size + PAGE_SIZE - 1) / PAGE_SIZE;
 
     int page_table[total_pages];

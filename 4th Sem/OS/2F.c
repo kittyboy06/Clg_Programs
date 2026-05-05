@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -32,40 +32,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-*/
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-int main(int argc, char *argv[])
-{
-    if (argc != 2)
-    {
-        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
-
-    char *filename = argv[1];
-
-    int fd = open(filename, O_RDONLY);
-    if (fd == -1)
-    {
-        perror("ERROR OPENING FILE");
-        exit(EXIT_FAILURE);
-    }
-
-    char buf[100];
-    ssize_t bytesRead;
-
-    while ((bytesRead = read(fd, buf, sizeof(buf))) > 0)
-    {
-        write(STDOUT_FILENO, buf, bytesRead);
-    }
-
-    if (bytesRead == -1)
-    {
-        perror("ERROR reading file");
-        close(fd);
-        exit(EXIT_FAILURE);
-    }

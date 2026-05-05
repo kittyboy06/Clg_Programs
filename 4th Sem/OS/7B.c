@@ -75,26 +75,21 @@ int main() {
     
     int processes[] = {212, 417, 112, 426};
     int numprocesses = sizeof(processes) / sizeof(processes[0]);*/
-    int nh, np;
     int holes[100], processes[100];
-    printf("Enter the Number of holes: ");
-    scanf("%d", &nh);
-
-    for (int i = 0; i < nh; i++) {
-        printf("Enter size of the hole %d: ", (i + 1));
+    int numholes, numprocesses;
+    printf("Enter the number of holes: ");
+    scanf("%d", &numholes);
+    printf("Enter the sizes of the holes:\n");
+    for (int i = 0; i < numholes; i++) {
         scanf("%d", &holes[i]);
     }
-
-    // 2. Input Number of Processes
-    printf("\nEnter the Number of process: ");
-    scanf("%d", &np);
-
-    for (int i = 0; i < np; i++) {
-        printf("Enter memory requirement of process %d: ", (i + 1));
+    printf("Enter the number of processes: ");
+    scanf("%d", &numprocesses);
+    printf("Enter the sizes of the processes:\n");
+    for (int i = 0; i < numprocesses; i++) {
         scanf("%d", &processes[i]);
     }
-
-    worstFitAllocation(holes, nh, processes, np);
+    worstFitAllocation(holes, numholes, processes, numprocesses);
 
     return 0;
 }
