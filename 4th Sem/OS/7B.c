@@ -70,13 +70,31 @@ void worstFitAllocation(int holes[], int numholes, int processes[], int numproce
 }
 
 int main() {
-    int holes[] = {100, 500, 200, 300, 600};
+    /*int holes[] = {100, 500, 200, 300, 600};
     int numholes = sizeof(holes) / sizeof(holes[0]);
     
     int processes[] = {212, 417, 112, 426};
-    int numprocesses = sizeof(processes) / sizeof(processes[0]);
+    int numprocesses = sizeof(processes) / sizeof(processes[0]);*/
+    int nh, np;
+    int holes[100], processes[100];
+    printf("Enter the Number of holes: ");
+    scanf("%d", &nh);
 
-    worstFitAllocation(holes, numholes, processes, numprocesses);
+    for (int i = 0; i < nh; i++) {
+        printf("Enter size of the hole %d: ", (i + 1));
+        scanf("%d", &holes[i]);
+    }
+
+    // 2. Input Number of Processes
+    printf("\nEnter the Number of process: ");
+    scanf("%d", &np);
+
+    for (int i = 0; i < np; i++) {
+        printf("Enter memory requirement of process %d: ", (i + 1));
+        scanf("%d", &processes[i]);
+    }
+
+    worstFitAllocation(holes, nh, processes, np);
 
     return 0;
 }
