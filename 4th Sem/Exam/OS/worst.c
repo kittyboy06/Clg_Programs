@@ -19,23 +19,33 @@ int main() {
     for (int i = 0; i < n; i++)
         scanf("%d", &processSize[i]);
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         int worst = -1;
-        for (int j = 0; j < m; j++) {
-            if (blockSize[j] >= processSize[i]) {
+        for (int j = 0; j < m; j++) 
+        {
+            if (blockSize[j] >= processSize[i]) 
+            {
                 if (worst == -1 || blockSize[j] > blockSize[worst])
                     worst = j;
             }
         }
 
-        if (worst != -1) {
+        if (worst != -1) 
+        {
             allocation[i] = worst;
             blockSize[worst] -= processSize[i];
-        } else allocation[i] = -1;
+        } 
+        else 
+        {
+            allocation[i] = -1;
+        }
     }
 
     for (int i = 0; i < n; i++)
+    {
         printf("Process %d -> Block %d\n", i+1, allocation[i]+1);
+    }
 
     return 0;
 }
