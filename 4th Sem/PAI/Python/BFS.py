@@ -1,30 +1,41 @@
-from collections import deque
+graph = {}
 
-def bfs(graph, start):
-    visited = set()
-    queue = deque([start])
-    visited.add(start)
-    
-    while queue:
-        vertex = queue.popleft()
-        print(vertex, end=' ')
-        
-        for neighbor in graph[vertex]:
+e = int(input("Enter number of edges: "))
+print("Enter each edge in format: node1 node2, e.g., A B")
+
+for i in range(e):
+    while True:
+        edge = input(f"Edge {i+1}: ").strip()
+        if not edge:
+            print("Empty input! Please enter two nodes.")
+            continue
+
+        parts = edge.split()
+        if len(parts) != 2:
+            print("Invalid format! Please enter exactly two nodes separated by a space.")
+            continue
+
+        u, v = parts
+        graph.setdefault(u, []).append(v)
+        graph.setdefault(v, []).append(u)
+        break
+
+start = input("Enter starting node for BFS: ").strip()
+if not start:
+    print("No starting node entered.")
+    raise SystemExit(1)
+
+visited = set()
+queue = [start]
+
+print("BFS order:")
+while queue:
+    node = queue.pop(0)
+    if node not in visited:
+        print(node, end=" ")
+        visited.add(node)
+        for neighbor in graph.get(node, []):
             if neighbor not in visited:
-                visited.add(neighbor)
                 queue.append(neighbor)
 
-def input_graph():
-    graph = {}
-    n = int(input("Enter number of nodes: "))
-    for i in range(n):
-        node = input(f"Enter node {i+1}: ")
-        neighbors = input(f"Enter neighbors of {node} (space-separated): ").split()
-        graph[node] = neighbors
-    return graph
-
-if __name__ == "__main__":
-    graph = input_graph()
-    start_node = input("Enter starting node for BFS: ")
-    print("BFS Traversal starting from node", start_node)
-    bfs(graph, start_node)
+print()

@@ -1,27 +1,22 @@
-facts = ["fever", "cough"]
-rules = [
-    (["fever", "cough"], "flu"),
-    (["flu"], "infection")
-]
-def forward_chaining(goal):
-    inferred = facts.copy()
-
-    
-    added = True
-    while added:
-        added = False
-        for condition, result in rules:
-            if all(c in inferred for c in condition):
-                
-                if result not in inferred:
-                    inferred.append(result)
-                    added = True
-                    
-                    if result == goal:
-                        return True
+facts = ["A","B"]
+rules ={
+"C": ["A","B"],
+"D": ["C"],
+"E": ["D"]
+}
+def backward_chaining(goal):
+    if goal in facts:
+        return True
+    if goal in rules:
+        subgoals = rules[goal]
+        for subgoal in subgoals:
+            if not backward_chaining(subgoal):
+                return False
+        return True
     return False
-goal = input("Enter the goal to check: ")
-if forward_chaining(goal):
-    print("Goal", goal, "is achieved (True)")
+
+goal = input ("Enter the goal:")
+if backward_chaining(goal):
+    print("Goal is achieved using Backward Chaining.")
 else:
-    print("Goal", goal, "cannot be achieved (False)")
+    print("Goal cannot be achieved.")

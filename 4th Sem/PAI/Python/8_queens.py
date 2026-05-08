@@ -7,17 +7,14 @@ def print_board(board):
 
 
 def is_safe(board, row, col):
-    # Check column
     for i in range(row):
         if board[i][col] == 1:
             return False
 
-    # Check upper left diagonal
     for i, j in zip(range(row - 1, -1, -1), range(col - 1, -1, -1)):
         if board[i][j] == 1:
             return False
 
-    # Check upper right diagonal
     for i, j in zip(range(row - 1, -1, -1), range(col + 1, N)):
         if board[i][j] == 1:
             return False
