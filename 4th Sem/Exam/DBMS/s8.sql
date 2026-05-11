@@ -16,24 +16,31 @@ CREATE TABLE Sales(
 );
 
 INSERT INTO Product VALUES
-(1,'Laptop',50000,10),
-(2,'Mobile',20000,15);
+(1,'Laptop',50000,10);
 
 INSERT INTO Sales VALUES
-(101,1,2),
-(102,2,3);
+(101,1,2);
 
+-- a
 ALTER TABLE Product
-ADD reorder INT DEFAULT 50;
+ADD reorder1 INT DEFAULT 50;
 
--- Sales Report
-SELECT P.Prodid,P.Prodesc,S.qty
+-- b
+SELECT P.Prodid,
+       P.Prodesc,
+       S.qty
 FROM Product P
 JOIN Sales S
 ON P.Prodid=S.Prodid;
 
--- Descending order
-SELECT Prodid,SUM(qty) AS TotalQty
+-- c
+SELECT Prodid,
+       SUM(qty)
 FROM Sales
 GROUP BY Prodid
-ORDER BY TotalQty DESC;
+ORDER BY SUM(qty) DESC;
+
+-- d
+SELECT *
+FROM Product
+WHERE Stock>0;

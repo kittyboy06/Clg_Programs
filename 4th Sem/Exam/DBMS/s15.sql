@@ -2,18 +2,20 @@ CREATE DATABASE q15;
 USE q15;
 
 CREATE TABLE Department(
-Depno INT PRIMARY KEY,
-Depname VARCHAR(50),
-Deplocation VARCHAR(50)
+    Depno INT PRIMARY KEY,
+    Depname VARCHAR(50),
+    Deplocation VARCHAR(50)
 );
 
 CREATE TABLE Employee(
-Empno INT PRIMARY KEY,
-Empname VARCHAR(50),
-DOJ DATE,
-Salary DECIMAL(10,2),
-Depno INT,
-FOREIGN KEY(Depno) REFERENCES Department(Depno)
+    Empno INT PRIMARY KEY,
+    Empname VARCHAR(50),
+    DOJ DATE,
+    Salary DECIMAL(10,2),
+    Depno INT,
+
+    FOREIGN KEY(Depno)
+    REFERENCES Department(Depno)
 );
 
 INSERT INTO Department VALUES
@@ -26,7 +28,7 @@ INSERT INTO Employee VALUES
 
 -- a
 SELECT Depno,
-COUNT(*) AS EmployeeCount
+       COUNT(*) AS EmployeeCount
 FROM Employee
 GROUP BY Depno
 ORDER BY Depno DESC;
@@ -39,8 +41,8 @@ ON D.Depno=E.Depno;
 
 -- c
 SELECT Empname,
-DOJ,
-TIMESTAMPDIFF(YEAR,DOJ,CURDATE()) AS YearsCompleted
+       DOJ,
+       TIMESTAMPDIFF(YEAR,DOJ,CURDATE()) AS YearsCompleted
 FROM Employee;
 
 -- d

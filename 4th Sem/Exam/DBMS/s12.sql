@@ -2,19 +2,22 @@ CREATE DATABASE q12;
 USE q12;
 
 CREATE TABLE stu_details(
-reg_no INT PRIMARY KEY,
-stu_name VARCHAR(50),
-DOB DATE,
-address VARCHAR(100),
-city VARCHAR(50)
+    reg_no INT PRIMARY KEY,
+    stu_name VARCHAR(50),
+    DOB DATE,
+    address VARCHAR(100),
+    city VARCHAR(50)
 );
 
 CREATE TABLE mark_details(
-reg_no INT,
-mark1 INT,
-mark2 INT,
-mark3 INT,
-total INT
+    reg_no INT,
+    mark1 INT,
+    mark2 INT,
+    mark3 INT,
+    total INT,
+
+    FOREIGN KEY(reg_no)
+    REFERENCES stu_details(reg_no)
 );
 
 INSERT INTO stu_details VALUES
@@ -45,8 +48,8 @@ CREATE PROCEDURE StudentAverage()
 BEGIN
 
 SELECT reg_no,
-(mark1+mark2+mark3) AS Total,
-(mark1+mark2+mark3)/3 AS Average
+       (mark1+mark2+mark3) AS Total,
+       (mark1+mark2+mark3)/3 AS Average
 FROM mark_details;
 
 END //

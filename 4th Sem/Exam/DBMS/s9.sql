@@ -2,23 +2,29 @@ CREATE DATABASE q9;
 USE q9;
 
 CREATE TABLE Member(
-membercode INT PRIMARY KEY,
-membername VARCHAR(50),
-phoneno VARCHAR(15)
+    membercode INT PRIMARY KEY,
+    membername VARCHAR(50),
+    phoneno VARCHAR(15)
 );
 
 CREATE TABLE Book(
-bookcode INT PRIMARY KEY,
-categorycode INT,
-bookname VARCHAR(50),
-cost DECIMAL(10,2)
+    bookcode INT PRIMARY KEY,
+    categorycode INT,
+    bookname VARCHAR(50),
+    cost DECIMAL(10,2)
 );
 
 CREATE TABLE IssueBook(
-membercode INT,
-bookcode INT,
-issuedate DATE,
-returndate DATE
+    membercode INT,
+    bookcode INT,
+    issuedate DATE,
+    returndate DATE,
+
+    FOREIGN KEY(membercode)
+    REFERENCES Member(membercode),
+
+    FOREIGN KEY(bookcode)
+    REFERENCES Book(bookcode)
 );
 
 INSERT INTO Member VALUES

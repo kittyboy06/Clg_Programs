@@ -2,16 +2,19 @@ CREATE DATABASE q14;
 USE q14;
 
 CREATE TABLE Course(
-Ccode INT PRIMARY KEY,
-Course_name VARCHAR(50)
+    Ccode INT PRIMARY KEY,
+    Course_name VARCHAR(50)
 );
 
 CREATE TABLE Student(
-Rollno INT PRIMARY KEY,
-Name VARCHAR(50),
-Coursecode INT,
-Mark1 INT,
-Mark2 INT
+    Rollno INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Coursecode INT,
+    Mark1 INT,
+    Mark2 INT,
+
+    FOREIGN KEY(Coursecode)
+    REFERENCES Course(Ccode)
 );
 
 ALTER TABLE Student
@@ -33,7 +36,7 @@ SET total=Mark1+Mark2;
 
 -- c
 SELECT S.Name,
-C.Course_name
+       C.Course_name
 FROM Student S
 JOIN Course C
 ON S.Coursecode=C.Ccode;
@@ -45,10 +48,10 @@ CREATE PROCEDURE OddEven(IN num INT)
 BEGIN
 
 IF MOD(num,2)=0 THEN
-SELECT 'Even Number';
+    SELECT 'Even Number';
 
 ELSE
-SELECT 'Odd Number';
+    SELECT 'Odd Number';
 
 END IF;
 

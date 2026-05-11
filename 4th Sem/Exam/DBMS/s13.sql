@@ -2,22 +2,24 @@ CREATE DATABASE q13;
 USE q13;
 
 CREATE TABLE Department(
-Dname VARCHAR(50),
-Deptno INT PRIMARY KEY,
-Dloc VARCHAR(50)
+    Dname VARCHAR(50),
+    Deptno INT PRIMARY KEY,
+    Dloc VARCHAR(50)
 );
 
 CREATE TABLE Employee(
-Empno INT PRIMARY KEY,
-Ename VARCHAR(50),
-Job VARCHAR(50),
-MgrId INT,
-DoB DATE,
-DoJ DATE,
-Sal DECIMAL(10,2),
-Comm DECIMAL(10,2),
-Deptno INT,
-FOREIGN KEY(Deptno) REFERENCES Department(Deptno)
+    Empno INT PRIMARY KEY,
+    Ename VARCHAR(50),
+    Job VARCHAR(50),
+    MgrId INT,
+    DoB DATE,
+    DoJ DATE,
+    Sal DECIMAL(10,2),
+    Comm DECIMAL(10,2),
+    Deptno INT,
+
+    FOREIGN KEY(Deptno)
+    REFERENCES Department(Deptno)
 );
 
 INSERT INTO Department VALUES
@@ -30,9 +32,9 @@ INSERT INTO Employee VALUES
 
 -- a
 SELECT Empno,
-Ename,
-Sal,
-TIMESTAMPDIFF(YEAR,DoJ,CURDATE()) AS Experience
+       Ename,
+       Sal,
+       TIMESTAMPDIFF(YEAR,DoJ,CURDATE()) AS Experience
 FROM Employee
 ORDER BY Sal DESC;
 
