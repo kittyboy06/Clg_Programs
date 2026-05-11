@@ -2,17 +2,17 @@ CREATE DATABASE q16;
 USE q16;
 
 CREATE TABLE order_master(
-    Orderno INT PRIMARY KEY,
-    Vencode VARCHAR(10),
-    Ordstatus VARCHAR(20),
-    Delv_date DATE
+Orderno INT PRIMARY KEY,
+Vencode VARCHAR(10),
+Ordstatus VARCHAR(20),
+Delv_date DATE
 );
 
 CREATE TABLE order_detail(
-    Orderno INT,
-    Itemcode INT,
-    Qty_ord INT,
-    Qty_deld INT
+Orderno INT,
+Itemcode INT,
+Qty_ord INT,
+Qty_deld INT
 );
 
 INSERT INTO order_master VALUES
@@ -46,11 +46,18 @@ DELIMITER //
 
 CREATE PROCEDURE LeapYear(IN yr INT)
 BEGIN
-    IF ((yr%4=0 AND yr%100<>0) OR yr%400=0) THEN
-        SELECT 'Leap Year';
-    ELSE
-        SELECT 'Not Leap Year';
-    END IF;
+
+IF ((yr%4=0 AND yr%100!=0)
+OR (yr%400=0)) THEN
+
+SELECT 'Leap Year';
+
+ELSE
+
+SELECT 'Not Leap Year';
+
+END IF;
+
 END //
 
 DELIMITER ;
