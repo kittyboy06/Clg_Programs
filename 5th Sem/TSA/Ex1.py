@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.seasonal import seasonal_decompose
-df = pd.read_csv(r"data_sales.csv")
+df = pd.read_csv(r"D:\KB06\Clg_Programs\5th Sem\TSA\data_sales.csv")
 df["date"] = pd.to_datetime(df["date"])
 df["revenue"] = pd.to_numeric(df["revenue"], errors="coerce")
 df = df.dropna(subset=["revenue"])
