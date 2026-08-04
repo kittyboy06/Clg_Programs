@@ -4,7 +4,7 @@ from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import numpy as np
 
-data = pd.read_csv("D:\\KB06\\Clg_Programs\\5th Sem\\TSA\\data_sales.csv")
+data = pd.read_csv("data_sales.csv")
 
 data["date"] = pd.to_datetime(data["date"])
 data.set_index("date", inplace=True)
