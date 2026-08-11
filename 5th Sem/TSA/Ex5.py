@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.arima.model import ARIMA
+import warnings
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+warnings.filterwarnings("ignore")
 df = pd.read_csv("data_sales.csv")
 df["date"] = pd.to_datetime(df["date"], dayfirst=True)
 df.set_index("date", inplace=True)
