@@ -30,7 +30,6 @@ plot_acf(diff_series)
 plt.show()
 plot_pacf(diff_series)
 plt.show()
-d = 1
 model = ARIMA(df["revenue"], order=(1,1,1))
 model_fit = model.fit()
 forecast = model_fit.forecast(steps=5)
