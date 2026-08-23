@@ -1,41 +1,33 @@
 import pandas as pd
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
 from sklearn.metrics import mean_squared_error
 
-train_data = pd.read_csv("train_data.csv")
+train = pd.read_csv("train_data.csv")
 
-X = train_data.iloc[:, :-1]
-Y = train_data.iloc[:, -1]
+X = train.iloc[:, :-1]
+y = train.iloc[:, -1]
 
-poly = PolynomialFeatures(degree=2)
+model = make_pipeline(
+    PolynomialFeatures(degree=2),
+    LinearRegression()
+)
 
-X_poly = poly.fit_transform(X)
+model.fit(X, y)
 
-model = LinearRegression()
-model.fit(X_poly, Y)
+print("Model Coefficients:", model[-1].coef_)
+print("Intercept:", model[-1].intercept_)
 
-print("Model Coefficients:", model.coef_)
-print("Model Intercept:", model.intercept_)
+for file in ["test_data1.csv", "test_data2.csv"]:
+    test = pd.read_csv(file)
 
-test_files = ["test_data1.csv", "test_data2.csv", "test_data3.csv"]
+    X1 = test.iloc[:, :-1]
+    y1 = test.iloc[:, -1]
 
-for file in test_files:
-    print("\n====================================")
-    print("Testing on:", file)
+    predictions = model.predict(X1)
+    mse = mean_squared_error(y1, predictions)
 
-    test_data = pd.read_csv(file)
-
-    X1 = test_data.iloc[:, :-1]
-    Y1 = test_data.iloc[:, -1]
-
-    X1_poly = poly.transform(X1)
-
-    Y_pred = model.predict(X1_poly)
-
-    mse = mean_squared_error(Y1, Y_pred)
-
-    print("Predicted Values:")
-    print(Y_pred)
-
-    print("Mean Squared Error (MSE):", mse)
+    print("\n", file)
+    print("Predicted Values:", predictions)
+    print("MSE:", mse)
