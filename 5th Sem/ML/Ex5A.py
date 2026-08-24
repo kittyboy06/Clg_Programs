@@ -13,7 +13,7 @@ model.fit(X, y)
 print("Coefficients:", model.coef_)
 print("Intercept:", model.intercept_)
 
-for file in ["test_data1.csv", "test_data2.csv"]:
+for file in ["5_test1.csv", "5_test2.csv"]:
     test = pd.read_csv(file)
 
     X1 = test.iloc[:, :-1]
