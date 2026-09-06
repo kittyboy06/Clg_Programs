@@ -2,75 +2,76 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-df = pd.read_csv("data_sales.csv")
+df = pd.read_csv("data.csv")
 
-df["date"] = pd.to_datetime(df["date"], dayfirst=True)
-df.set_index("date", inplace=True)
+print("Dataset:")
+print(df.head())
 
-plt.figure(figsize=(10,5))
-plt.plot(df.index, df["revenue"], marker='o')
+if "Date" in df.columns:
+    df["Date"] = pd.to_datetime(df["Date"])
+    df.set_index("Date", inplace=True)
+
+series = df["Value"].dropna()
+
+plt.figure(figsize=(10, 5))
+plt.plot(series)
 plt.title("Original Time Series")
-plt.xlabel("Date")
-plt.ylabel("Revenue")
+plt.xlabel("Time")
+plt.ylabel("Value")
 plt.grid(True)
 plt.show()
 
-df["Log_Revenue"] = np.log(df["revenue"])
+log_series = np.log(series)
 
-df["Differenced"] = df["revenue"].diff()
-
-df["Moving_Avg"] = df["revenue"].rolling(window=3).mean()
-
+df = pd.DataFrame({"Value": series, "LogValue": log_series})
 df["Time"] = np.arange(len(df))
 
+df["Differenced"] = df["LogValue"].diff()
+
+df["MovingAverage"] = df["Value"].rolling(window=3).mean()
+
 X = df[["Time"]]
-y = df["Log_Revenue"]
+y = df["LogValue"]
 
 model = LinearRegression()
 model.fit(X, y)
 
-df["Predicted_Log"] = model.predict(X)
+predicted_log = model.predict(X)
+predicted = np.exp(predicted_log)
 
-plt.figure(figsize=(10,5))
-plt.plot(df.index, y, label="Actual Log Revenue", marker='o')
-plt.plot(df.index, df["Predicted_Log"], label="Predicted Log Revenue", linestyle="--")
-plt.title("Actual vs Predicted (Log Scale)")
-plt.xlabel("Date")
-plt.ylabel("Log Revenue")
+mae = mean_absolute_error(df["Value"], predicted)
+rmse = np.sqrt(mean_squared_error(df["Value"], predicted))
+
+print("\nModel Coefficient:", model.coef_[0])
+print("Model Intercept:", model.intercept_)
+
+print("\nMean Absolute Error (MAE):", round(mae, 4))
+print("Root Mean Squared Error (RMSE):", round(rmse, 4))
+
+plt.figure(figsize=(10, 5))
+plt.plot(df.index, df["Value"], label="Actual")
+plt.plot(df.index, predicted, label="Predicted")
+plt.title("Actual vs Predicted Values")
+plt.xlabel("Time")
+plt.ylabel("Value")
 plt.legend()
 plt.grid(True)
 plt.show()
 
-rmse = np.sqrt(mean_squared_error(y, df["Predicted_Log"]))
-mae = mean_absolute_error(y, df["Predicted_Log"])
+residuals = df["Value"] - predicted
 
-print("RMSE:", rmse)
-print("MAE :", mae)
-
-df["Residuals"] = y - df["Predicted_Log"]
-
-plt.figure(figsize=(10,5))
-plt.plot(df.index, df["Residuals"], marker='o')
-plt.axhline(0, color='red', linestyle='--')
+plt.figure(figsize=(10, 5))
+plt.plot(df.index, residuals)
+plt.axhline(0, linestyle="--")
 plt.title("Residual Analysis")
-plt.xlabel("Date")
-plt.ylabel("Residuals")
+plt.xlabel("Time")
+plt.ylabel("Residual")
 plt.grid(True)
 plt.show()
 
-df["Predicted_Revenue"] = np.exp(df["Predicted_Log"])
+print("\nPredicted Values:")
+print(predicted)
 
-print("\nActual vs Predicted Revenue")
-print(df[["revenue", "Predicted_Revenue"]])
-
-plt.figure(figsize=(10,5))
-plt.plot(df.index, df["revenue"], label="Actual Revenue", marker='o')
-plt.plot(df.index, df["Predicted_Revenue"], label="Predicted Revenue", linestyle='--')
-plt.title("Actual vs Predicted Revenue")
-plt.xlabel("Date")
-plt.ylabel("Revenue")
-plt.legend()
-plt.grid(True)
-plt.show()
+print("\nProgram completed successfully.")

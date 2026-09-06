@@ -4,43 +4,51 @@ from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import numpy as np
 
-data = pd.read_csv("data_sales.csv")
+df = pd.read_csv("data.csv")
 
-data["date"] = pd.to_datetime(data["date"])
-data.set_index("date", inplace=True)
+print("Dataset:")
+print(df.head())
 
-series = data["revenue"]
+if "Date" in df.columns:
+    df["Date"] = pd.to_datetime(df["Date"])
+    df.set_index("Date", inplace=True)
+
+series = df["Value"].dropna()
 
 plt.figure(figsize=(10, 5))
-plt.plot(series, label="Original Data")
+plt.plot(series, label="Original Series")
 plt.title("Original Time Series")
-plt.xlabel("Date")
-plt.ylabel("Revenue")
+plt.xlabel("Time")
+plt.ylabel("Value")
 plt.legend()
+plt.grid(True)
 plt.show()
 
-train = series[:-5]
-test = series[-5:]
+model = SimpleExpSmoothing(series)
 
-model = SimpleExpSmoothing(train)
 fit = model.fit(optimized=True)
 
-forecast = fit.forecast(len(test))
+alpha = fit.params["smoothing_level"]
+
+smoothed_values = fit.fittedvalues
+
+print("\nOptimized Alpha:", round(alpha, 4))
 
 plt.figure(figsize=(10, 5))
-plt.plot(train, label="Training Data")
-plt.plot(test, label="Actual Test Data")
-plt.plot(fit.fittedvalues, label="Smoothed Values")
-plt.plot(forecast, label="Forecast", color="red")
+plt.plot(series, label="Original Series")
+plt.plot(smoothed_values, label="Smoothed Series")
 plt.title("First-Order Exponential Smoothing")
-plt.xlabel("Date")
-plt.ylabel("Revenue")
+plt.xlabel("Time")
+plt.ylabel("Value")
 plt.legend()
+plt.grid(True)
 plt.show()
 
-mae = mean_absolute_error(test, forecast)
-rmse = np.sqrt(mean_squared_error(test, forecast))
+mae = mean_absolute_error(series, smoothed_values)
+rmse = np.sqrt(mean_squared_error(series, smoothed_values))
 
-print("Mean Absolute Error (MAE):", mae)
-print("Root Mean Squared Error (RMSE):", rmse)
-print("Smoothing Parameter (Alpha):", fit.model.params["smoothing_level"])
+print("\nForecast Performance:")
+print("MAE :", round(mae, 4))
+print("RMSE:", round(rmse, 4))
+
+print("\nProgram completed successfully.")
