@@ -1,28 +1,32 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from statsmodels.tsa.seasonal import seasonal_decompose
-df = pd.read_csv(r"D:\KB06\Clg_Programs\5th Sem\TSA\data_sales.csv")
-df["date"] = pd.to_datetime(df["date"])
-df["revenue"] = pd.to_numeric(df["revenue"], errors="coerce")
-df = df.dropna(subset=["revenue"])
-df.set_index("date", inplace=True)
-plt.figure(figsize=(10,5))
-plt.plot(df["revenue"], color="blue")
-plt.title("Revenue Over Time")
+
+df = pd.read_csv("data.csv")
+
+df["Date"] = pd.to_datetime(df["date"])
+df.set_index("Date", inplace=True)
+
+series = df["Value"]
+
+plt.figure(figsize=(10, 5))
+sns.lineplot(x=series.index, y=series.values)
+plt.title("Time Series Plot")
 plt.xlabel("Date")
-plt.ylabel("Revenue")
-plt.grid(True)
+plt.ylabel("Value")
 plt.show()
+
 df["Month"] = df.index.month
-monthly_avg = df.groupby("Month")["revenue"].mean()
-plt.figure(figsize=(8,5))
-plt.plot(monthly_avg.index, monthly_avg.values, marker="o")
-plt.title("Monthly Average Revenue")
+
+plt.figure(figsize=(10, 5))
+sns.boxplot(x=df["Month"], y=df["Value"])
+plt.title("Seasonal Plot")
 plt.xlabel("Month")
-plt.ylabel("Average Revenue")
-plt.xticks(range(1,13))
-plt.grid(True)
+plt.ylabel("Value")
 plt.show()
-result = seasonal_decompose(df["revenue"], model="additive", period=12)
+
+result = seasonal_decompose(series, model="additive", period=12)
+
 result.plot()
 plt.show()

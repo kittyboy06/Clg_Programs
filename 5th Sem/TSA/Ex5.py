@@ -4,50 +4,59 @@ import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.arima.model import ARIMA
-import warnings
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-warnings.filterwarnings("ignore")
-df = pd.read_csv("data_sales.csv")
-df["date"] = pd.to_datetime(df["date"], dayfirst=True)
-df.set_index("date", inplace=True)
-plt.figure(figsize=(10,5))
-plt.plot(df["revenue"], marker='o')
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+
+df = pd.read_csv("data.csv")
+
+if "Date" in df.columns:
+    df["Date"] = pd.to_datetime(df["Date"])
+    df.set_index("Date", inplace=True)
+
+series = df["Value"].dropna()
+
+plt.plot(series)
 plt.title("Original Time Series")
-plt.xlabel("Date")
-plt.ylabel("Revenue")
-plt.grid(True)
 plt.show()
-result = adfuller(df["revenue"])
-print("ADF Statistic :", result[0])
-print("p-value :", result[1])
-df["Log_Revenue"] = np.log(df["revenue"])
-df["Diff_Log"] = df["Log_Revenue"].diff()
-diff_series = df["Diff_Log"].dropna()
-result = adfuller(diff_series)
-print("ADF Statistic after Differencing :", result[0])
-print("p-value :", result[1])
-plot_acf(diff_series)
+
+result = adfuller(series)
+d = 0
+
+if result[1] > 0.05:
+    series = np.log(series)
+    series = series.diff().dropna()
+    d = 1
+
+lags = min(10, len(series) // 2 - 1)
+
+plot_acf(series, lags=lags)
 plt.show()
-plot_pacf(diff_series)
+
+plot_pacf(series, lags=lags, method="ywm")
 plt.show()
-model = ARIMA(df["revenue"], order=(1,1,1))
-model_fit = model.fit()
-forecast = model_fit.forecast(steps=5)
-print("Forecasted Values:")
-print(forecast)
-plt.figure(figsize=(10,5))
-plt.plot(df.index, df["revenue"], label="Actual")
-future_dates = pd.date_range(start=df.index[-1], periods=6, freq="D")[1:]
-plt.plot(future_dates, forecast, marker='o', label="Forecast")
-plt.title("Actual vs Forecast")
-plt.xlabel("Date")
-plt.ylabel("Revenue")
+
+p = 1
+q = 1
+
+model = ARIMA(df["Value"], order=(p, d, q))
+fit = model.fit()
+
+train = df["Value"][:-5]
+test = df["Value"][-5:]
+
+model = ARIMA(train, order=(p, d, q))
+fit = model.fit()
+
+predicted = fit.forecast(steps=len(test))
+
+print("ARIMA Parameters:", (p, d, q))
+print("MAE:", mean_absolute_error(test, predicted))
+print("RMSE:", np.sqrt(mean_squared_error(test, predicted)))
+
+plt.plot(test, label="Actual")
+plt.plot(predicted, label="Predicted")
+plt.title("Actual vs Predicted")
 plt.legend()
-plt.grid(True)
 plt.show()
-predicted = model_fit.predict(start=1, end=len(df)-1)
-actual = df["revenue"][1:]
-rmse = np.sqrt(mean_squared_error(actual, predicted))
-mae = mean_absolute_error(actual, predicted)
-print("RMSE :", rmse)
-print("MAE :", mae)
+
+print("Forecast:")
+print(fit.forecast(steps=5))

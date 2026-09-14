@@ -1,108 +1,68 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-from statsmodels.tsa.statespace.sarimax import SARIMAX
 from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 from sklearn.metrics import mean_absolute_error, mean_squared_error
+import numpy as np
 
-data = pd.read_csv("seasonal_sales.csv", parse_dates=["Date"])
-data.set_index("Date", inplace=True)
-data = data.asfreq("MS")
+df = pd.read_csv("data.csv")
 
-print("Dataset loaded successfully.")
-print("Total observations:", len(data))
+df["Date"] = pd.to_datetime(df["date"])
+df.set_index("Date", inplace=True)
 
-plt.figure(figsize=(10, 5))
-plt.plot(data.index, data["Sales"], marker="o")
-plt.title("Monthly Sales Data")
-plt.xlabel("Date")
-plt.ylabel("Sales")
-plt.grid(True)
+series = df["Value"].dropna()
+
+plt.plot(series)
+plt.title("Original Time Series")
 plt.show()
 
-result = adfuller(data["Sales"])
-print("\nADF Test")
-print("ADF Statistic:", round(result[0], 4))
-print("p-value:", round(result[1], 4))
+result = adfuller(series, maxlag=1, regression="c", autolag=None)
+print("ADF p-value:", round(result[1], 4))
 
-if result[1] < 0.05:
-    print("Result: Stationary")
-else:
-    print("Result: Non-stationary")
+d = 1 if result[1] > 0.05 else 0
 
-p, d, q = 1, 1, 1
-P, D, Q, s = 1, 1, 1, 12
+p, q = 1, 1
+P, Q = 0, 0
+D = 0
+s = 12
 
-print("\nSARIMA Parameters")
-print("Order:", (p, d, q))
-print("Seasonal Order:", (P, D, Q, s))
+n = int(len(series) * 0.8)
 
-train_size = int(len(data) * 0.80)
-train = data.iloc[:train_size]
-test = data.iloc[train_size:]
-
-print("\nData Split")
-print("Training observations:", len(train))
-print("Testing observations:", len(test))
+train = series[:n]
+test = series[n:]
 
 model = SARIMAX(
-    train["Sales"],
+    train,
     order=(p, d, q),
     seasonal_order=(P, D, Q, s),
     enforce_stationarity=False,
     enforce_invertibility=False
 )
-model_fit = model.fit(disp=False)
 
-forecast = model_fit.get_forecast(steps=len(test))
-forecast_values = forecast.predicted_mean
+fit = model.fit(disp=False)
 
-plt.figure(figsize=(10, 5))
-plt.plot(train.index, train["Sales"], label="Training Data")
-plt.plot(test.index, test["Sales"], label="Actual")
-plt.plot(test.index, forecast_values, label="Forecast")
-plt.title("SARIMA Forecast vs Actual")
-plt.xlabel("Date")
-plt.ylabel("Sales")
+forecast = fit.forecast(len(test))
+
+mae = mean_absolute_error(test, forecast)
+rmse = np.sqrt(mean_squared_error(test, forecast))
+
+print("SARIMA Parameters:", (p, d, q, P, D, Q, s))
+print("MAE:", round(mae, 4))
+print("RMSE:", round(rmse, 4))
+
+plt.plot(series, label="Actual")
+plt.plot(test.index, forecast, label="Forecast")
+plt.title("Actual vs Forecast")
 plt.legend()
-plt.grid(True)
 plt.show()
 
-actual = test["Sales"]
-mae = mean_absolute_error(actual, forecast_values)
-rmse = np.sqrt(mean_squared_error(actual, forecast_values))
-mape = np.mean(np.abs((actual - forecast_values) / actual)) * 100
+future = fit.forecast(steps=12)
 
-print("\nForecast Accuracy")
-print("MAE :", round(mae, 2))
-print("RMSE:", round(rmse, 2))
-print("MAPE:", round(mape, 2), "%")
+print("Future Forecast:")
+print(future)
 
-future_steps = 12
-
-future_model = SARIMAX(
-    data["Sales"],
-    order=(p, d, q),
-    seasonal_order=(P, D, Q, s),
-    enforce_stationarity=False,
-    enforce_invertibility=False
-)
-future_model_fit = future_model.fit(disp=False)
-future_forecast = future_model_fit.get_forecast(steps=future_steps)
-future_values = future_forecast.predicted_mean
-
-print("\nFuture 12-Month Forecast")
-for date, value in future_values.items():
-    print(date.strftime("%Y-%m"), ":", round(value, 2))
-
-plt.figure(figsize=(10, 5))
-plt.plot(data.index, data["Sales"], label="Historical Data")
-plt.plot(future_values.index, future_values, label="Future Forecast", marker="o")
-plt.title("Future 12-Month SARIMA Forecast")
-plt.xlabel("Date")
-plt.ylabel("Sales")
+plt.plot(series, label="Actual")
+plt.plot(future.index, future, label="Future Forecast")
+plt.title("Future Forecast")
 plt.legend()
-plt.grid(True)
 plt.show()
-
-print("\nSARIMA Modeling Completed Successfully.")
