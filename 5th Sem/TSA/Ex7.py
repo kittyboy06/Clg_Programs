@@ -5,9 +5,9 @@ from statsmodels.tsa.api import VAR
 from statsmodels.tsa.stattools import adfuller
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-df = pd.read_csv("data.csv")
+df = pd.read_csv("2col.csv")
 
-df["Date"] = pd.to_datetime(df["Date"])
+df["Date"] = pd.to_datetime(df["date"])
 df.set_index("Date", inplace=True)
 
 data = df.select_dtypes(include=np.number)
