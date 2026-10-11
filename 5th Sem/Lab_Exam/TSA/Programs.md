@@ -11,7 +11,6 @@ Algorithm:
 8. Analyze trends and patterns visually.
 9. Stop the program.
 
-
 Experiment 2: Autocorrelation and Partial Autocorrelation Analysis
 Aim: To create a Python program to compute and interpret ACF and PACF plots to identify patterns and determine suitable lag values.
 Algorithm:
