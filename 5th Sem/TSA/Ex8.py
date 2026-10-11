@@ -6,33 +6,52 @@ from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 
 df = pd.read_csv("data.csv")
 
-if "Date" in df.columns:
-    df["Date"] = pd.to_datetime(df["Date"])
-    df.set_index("Date", inplace=True)
+date_col = next(
+    (col for col in df.columns if col.lower() == "date"),
+    None
+)
 
-series = df["Value"].dropna()
+if date_col:
+    df[date_col] = pd.to_datetime(df[date_col], dayfirst=True)
+    df.set_index(date_col, inplace=True)
+
+series = pd.to_numeric(df["Value"], errors="coerce").dropna()
+
+if len(series) < 2:
+    raise ValueError("Dataset must contain at least two valid values.")
 
 n = int(len(series) * 0.8)
-train = series[:n]
-test = series[n:]
+n = max(1, min(n, len(series) - 1))
 
-naive = np.repeat(train.iloc[-1], len(test))
+train = series.iloc[:n]
+test = series.iloc[n:]
+
+print("Training observations:", len(train))
+print("Testing observations:", len(test))
+print()
+
+naive_forecast = np.repeat(train.iloc[-1], len(test))
 
 mean_forecast = np.repeat(train.mean(), len(test))
 
-model = SimpleExpSmoothing(train)
+model = SimpleExpSmoothing(
+    train.astype(float),
+    initialization_method="estimated"
+)
+
 fit = model.fit()
 exp_forecast = fit.forecast(len(test))
 
 methods = {
-    "Naive": naive,
-    "Mean": mean_forecast,
-    "Exponential Smoothing": exp_forecast
+    "Naive Forecast": naive_forecast,
+    "Mean Forecast": mean_forecast,
+    "Exponential Smoothing": exp_forecast.to_numpy()
 }
 
 for name, forecast in methods.items():
     rmse = np.sqrt(mean_squared_error(test, forecast))
     mae = mean_absolute_error(test, forecast)
+
     print(name)
     print("RMSE:", round(rmse, 4))
     print("MAE:", round(mae, 4))
@@ -40,11 +59,23 @@ for name, forecast in methods.items():
 
 for name, forecast in methods.items():
     plt.figure(figsize=(10, 5))
-    plt.plot(test.index, test, label="Actual")
-    plt.plot(test.index, forecast, label=name)
-    plt.title(name + " Forecast")
-    plt.xlabel("Date")
+
+    plt.plot(
+        test.index,
+        test.to_numpy(),
+        label="Actual Values",
+        marker="o"
+    )
+
+    plt.plot(
+        test.index,
+        forecast,
+        label="Predicted Values",
+        marker="x"
+    )
+
+    plt.title(name + " - Actual vs Forecast")
+    plt.xlabel("Date" if date_col else "Time Step")
     plt.ylabel("Value")
     plt.legend()
-    plt.grid(True)
     plt.show()
