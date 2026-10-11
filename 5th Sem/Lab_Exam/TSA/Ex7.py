@@ -24,7 +24,7 @@ model = VAR(train)
 lag = model.select_order(maxlags=3).aic
 fit = model.fit(lag)
 
-forecast = fit.forecast(train.values[-lag:], steps=len(test))
+forecast = fit.forecast(train.values[-lag:], steps=len(test)) # type: ignore
 forecast_df = pd.DataFrame(forecast, index=test.index, columns=test.columns)
 
 for col in test.columns:
